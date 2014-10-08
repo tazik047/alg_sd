@@ -8,6 +8,16 @@ namespace lab1
 {
     static class Task_4
     {
+
+        /// <summary>
+        /// Та же сортировка вставками.
+        /// Работает так: сортируем массив на 1 элемент меньше. 
+        /// И потом вставляем последний в нужное место.
+        /// Рекурсия.
+        /// 
+        /// O(n*log n) - просто используется бин поиск.
+        /// </summary>
+        /// <param name="mas">Сам массив</param>
         public static void InsertSearch(List<int> mas)
         {
             if (mas.Count == 0)
