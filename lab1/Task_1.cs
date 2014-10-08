@@ -51,7 +51,7 @@ namespace lab1
         /// <param name="r">правая граница</param>
         /// <param name="l">левая граница</param>
         /// <returns></returns>
-        private static int binSearch(List<int> mas, int el, int r, int l = 0)
+        public static int binSearch(List<int> mas, int el, int r, int l = 0)
         {
             int index = (l + r) / 2;
             if (l > r)
