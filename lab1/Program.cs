@@ -11,5 +11,13 @@ namespace lab1
         static void Main(string[] args)
         {
         }
+
+        static void PrintMas<T>(IEnumerable<T> mas)
+        {
+            Console.WriteLine();
+            foreach (var i in mas)
+                Console.Write("{0}, ", i);
+            Console.WriteLine();
+        }
     }
 }
