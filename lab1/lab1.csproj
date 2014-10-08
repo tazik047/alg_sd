@@ -45,6 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task_1.cs" />
     <Compile Include="Task_2.cs" />
+    <Compile Include="Task_3.cs" />
+    <Compile Include="Task_4.cs" />
+    <Compile Include="Task_5.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
