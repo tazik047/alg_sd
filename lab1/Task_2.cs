@@ -8,7 +8,7 @@ namespace lab1
 {
     static class Task_2
     {
-        public List<T> NotRecSort<T>(List<T> list) where T : IComparable
+        public static List<T> NotRecSort<T>(List<T> list) where T : IComparable
         {
             List<T> left = list.GetRange(0, list.Count / 2);
             List<T> right = list.GetRange(left.Count, list.Count - left.Count);
@@ -31,7 +31,7 @@ namespace lab1
             //return Merge(list.GetRange(0, list.Count / 2), list.GetRange(list.Count / 2, list.Count / 2));
         }
 
-        public static List<T> SortWithInsertion<T>(List<T> list, int k) where T : IComparable
+        public static List<int> SortWithInsertion(List<int> list, int k)
         {
             double test = Math.Log((double)k, 2);
             double t2 = Math.Round(test);
@@ -41,7 +41,7 @@ namespace lab1
                 return list;
             }
 
-            if (list.Count <= 1 && k != 1) // ??
+            if (list.Count < k) // ??
             {
                 Console.WriteLine("Число k слишком большое."); // ??
                 return list;
@@ -49,31 +49,21 @@ namespace lab1
 
             if (list.Count == k || list.Count == k + 1 || list.Count == k - 1) // Сортировка вставками.
             {
-                for (int i = 1; i < list.Count; i++)
-                {
-                    for (int j = i; j > 0 && (list[j].CompareTo(list[j - 1]) < 0); j--)
-                    {
-                        T temp = list[j];
-                        list[j] = list[j - 1];
-                        list[j - 1] = temp;
-                    }
-                }
-                foreach (T el in list) Console.Write(el + "   ");
-                Console.WriteLine();
+                Task_4.InsertSearch(list);
                 return list;
             }
 
-            List<T> left = list.GetRange(0, list.Count / 2);
-            List<T> right = list.GetRange(left.Count, list.Count - left.Count);
+            List<int> left = list.GetRange(0, list.Count / 2);
+            List<int> right = list.GetRange(left.Count, list.Count - left.Count);
             return Merge(SortWithInsertion(left, k), SortWithInsertion(right, k));
         }
 
-        public static List<T> Merge<T>(List<T> left, List<T> right) where T : IComparable
+        public static List<int> Merge(List<int> left, List<int> right)
         {
-            List<T> result = new List<T>();
+            List<int> result = new List<int>();
             while (left.Count > 0 && right.Count > 0)
             {
-                if (left[0].CompareTo(right[0]) <= 0)
+                if (left[0] <= right[0])
                 {
                     result.Add(left[0]);
                     left.RemoveAt(0);
