@@ -8,5 +8,6 @@ namespace lab1
 {
     static class Task_3
     {
+        //типа код
     }
 }
