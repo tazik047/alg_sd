@@ -8,8 +8,9 @@ namespace lab1
 {
     static class Task_5
     {
-        public static int Partition(List<int> m, int a, int b) 
+        public static int Partition(List<int> m, int a, int b)
         {
+            Random rnd = new Random();
             int i = a;
             for (int j = a; j <= b; j++)
             {
@@ -35,6 +36,23 @@ namespace lab1
             int c = Partition(m, a, b);
             Qsort(m, a, c - 1);
             Qsort(m, c + 1, b);
+        }
+
+
+        public static List<T> QuickSortWithRnd<T>(List<T> list) where T : IComparable<T>
+        {
+            if (!list.Any())
+            {
+                return new List<T>();
+            }
+            Random rnd = new Random();
+            int index = rnd.Next(0, list.Count());
+            var pivot = list.ElementAt(index);
+            list.RemoveAt(index);
+            var smaller = QuickSortWithRnd(list.Where(item => item.CompareTo(pivot) <= 0).ToList());
+            var larger = QuickSortWithRnd(list.Where(item => item.CompareTo(pivot) > 0).ToList());
+
+            return smaller.Concat(new[] { pivot }).Concat(larger).ToList();
         }
     }
 }
