@@ -87,8 +87,17 @@ namespace lab1
         /// Все тоже, но теперь с рекурсеей.
         /// </summary>
         /// <param name="mas">Сам массив</param>
+        public static void SortWithBinAndReqursion(List<int> mas)
+        {
+            sortWithBinAndReqursion(mas, 1);
+        }
+
+        /// <summary>
+        /// Все тоже, но теперь с рекурсеей.
+        /// </summary>
+        /// <param name="mas">Сам массив</param>
         /// <param name="i">Начало неотсортированной части</param>
-        public static void sortWithBinAndReqursion(List<int> mas, int i = 1)
+        private static void sortWithBinAndReqursion(List<int> mas, int i)
         {
             if (i >= mas.Count)
                 return;
