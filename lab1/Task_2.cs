@@ -8,29 +8,6 @@ namespace lab1
 {
     static class Task_2
     {
-        public static List<T> NotRecSort<T>(List<T> list) where T : IComparable
-        {
-            List<T> left = list.GetRange(0, list.Count / 2);
-            List<T> right = list.GetRange(left.Count, list.Count - left.Count);
-            List<T> result = new List<T>();
-            int step = 0;
-
-            for (int i = 0; i < list.Count - 1; )
-            {
-                if (list[i+1].CompareTo(list[i]) < 0)
-                {
-                    T temp = list[i];
-                    list[i] = list[i + 1];
-                    list[i + 1] = temp;
-                }
-                i += 2;
-            }
-
-                return result;
-            //return Merge(left, right);
-            //return Merge(list.GetRange(0, list.Count / 2), list.GetRange(list.Count / 2, list.Count / 2));
-        }
-
         public static List<int> SortWithInsertion(List<int> list, int k)
         {
             double test = Math.Log((double)k, 2);
