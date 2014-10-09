@@ -17,5 +17,51 @@ namespace lab1
             return Task_2.Merge(RecMergeSort(left), RecMergeSort(right));
         }
 
+        public static void NotRecMergeSort(List<int> list)
+        {
+            int k = 1;
+            while (k < list.Count)
+            {
+                for (int i = 0; i < list.Count; i += k * 2)
+                {
+                    merge(list, i, k);
+                    //var t = Task_2.Merge(list.GetRange(i, k), list.GetRange(i + k, k));
+
+                }
+                k *= 2;
+            }
+        }
+
+        private static void merge(List<int> list, int f, int flen)
+        {
+            int index = f;
+            int slen = flen;
+            if (f + flen * 2 > list.Count)
+                slen = slen - ((f + 2 * flen) - list.Count);
+            if (slen < 0)
+            {
+                flen += slen;
+                slen = 0;
+            }
+            var left = list.GetRange(f, flen);
+            var right = list.GetRange(f + flen, slen);
+            while (left.Count > 0 && right.Count > 0)
+            {
+                if (left[0] <= right[0])
+                {
+                    list[index++] = left[0];
+                    left.RemoveAt(0);
+                }
+                else
+                {
+                    list[index++] = right[0];
+                    right.RemoveAt(0);
+                }
+            }
+            for (int i = 0; i < left.Count; i++)
+                list[index++] = left[i];
+            for (int i = 0; i < right.Count; i++)
+                list[index++] = right[i];
+        }
     }
 }
