@@ -8,6 +8,11 @@ namespace lab1
 {
     static class Task_3
     {
+        /// <summary>
+        /// Рекурсивный вариант сортировки слиянием
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<int> RecMergeSort(List<int> list)
         {
             if (list.Count <= 1) return list;
@@ -29,7 +34,12 @@ namespace lab1
                 k *= 2;
             }
         }
-
+        /// <summary>
+        /// Сливает подмассивы по заданным индексам в один массив
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="f"></param>
+        /// <param name="flen"></param>
         private static void merge(List<int> list, int f, int flen)
         {
             int index = f;

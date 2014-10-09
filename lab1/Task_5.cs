@@ -38,7 +38,12 @@ namespace lab1
             Qsort(m, c + 1, b);
         }
 
-
+        /// <summary>
+        /// Быстрая сортировка с рандомным выбором опорного элемента
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static List<T> QuickSortWithRnd<T>(List<T> list) where T : IComparable<T>
         {
             if (!list.Any())

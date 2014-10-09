@@ -8,6 +8,12 @@ namespace lab1
 {
     static class Task_2
     {
+        /// <summary>
+        /// Метод разбития массивом на подмассивы
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="k"></param>
+        /// <returns></returns>
         public static List<int> SortWithInsertion(List<int> list, int k)
         {
             double test = Math.Log((double)k, 2);
@@ -34,7 +40,12 @@ namespace lab1
             List<int> right = list.GetRange(left.Count, list.Count - left.Count);
             return Merge(SortWithInsertion(left, k), SortWithInsertion(right, k));
         }
-
+        /// <summary>
+        /// Слияние подмассивов
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
         public static List<int> Merge(List<int> left, List<int> right)
         {
             List<int> result = new List<int>();
