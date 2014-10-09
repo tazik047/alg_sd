@@ -24,7 +24,12 @@ namespace lab1
             return i - 1;                        // в индексе i хранится <новая позиция элемента m[b]> + 1
         }
 
-        public static void Qsort(List<int> m, int a, int b) // a - начало подмножества, b - конец
+        public static void Qsort(List<int> m)
+        {
+            Qsort(m, 0, m.Count - 1);
+        }
+
+        private static void Qsort(List<int> m, int a, int b) // a - начало подмножества, b - конец
         {                                        // для первого вызова: a = 0, b = m.Count - 1
             if (a >= b) return;
             int c = Partition(m, a, b);
