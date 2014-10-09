@@ -25,8 +25,6 @@ namespace lab1
                 for (int i = 0; i < list.Count; i += k * 2)
                 {
                     merge(list, i, k);
-                    //var t = Task_2.Merge(list.GetRange(i, k), list.GetRange(i + k, k));
-
                 }
                 k *= 2;
             }

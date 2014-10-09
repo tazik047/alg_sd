@@ -22,7 +22,7 @@ namespace CountTimeAndExport2EXCEL
         {
             var mas = new List<Element>();
             long countELem = 1;
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < 15; i++)
             {
                 List<int> m = new List<int>();
                 Random rnd = new Random();
