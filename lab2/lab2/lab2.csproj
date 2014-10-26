@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PartGenya.cs" />
+    <Compile Include="PartStas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="List.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
