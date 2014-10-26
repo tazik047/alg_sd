@@ -1,0 +1,252 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace lab2
+{
+
+    class RecursList<T>
+    {
+        private T Info;
+        private RecursList<T> Tail;
+        private int Index;
+        public int Length
+        {
+            get { return Index + 1; }
+        }
+        
+        public RecursList(T value)
+        {
+            Info = value;
+            Tail = null;
+            Index = 0;
+        }
+
+        private RecursList(T value, RecursList<T> othertail)
+        {
+            Info = value;
+            Tail = othertail;
+            if (othertail != null)
+                Index = othertail.Index + 1;
+            else
+                Index = 0;
+        }
+
+        public RecursList()
+        {
+            Info = default(T);
+            Tail = null;
+            Index = -1;
+        }
+
+        public T this[int index]
+        {
+            get
+            {
+                try
+                {
+                    if (index < 0 || index >= Length)
+                        throw new Exception("Индекс за границей списка");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return default(T);
+                }
+                for (RecursList<T> i = this; i != null; i = i.Tail)
+                {
+                    if (i.Index == index)
+                        return i.Info;
+                }
+                return default(T);
+            }
+
+            set
+            {
+                try
+                {
+                    if (index < 0 || index >= Length)
+                        throw new Exception("Индекс за границей списка");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return;
+                }
+
+                for (RecursList<T> i = this; i != null; i = i.Tail)
+                {
+                    if (i.Index == index)
+                        i.Info = value;
+                }
+            }
+        }
+
+        public void Add(T value)
+        {
+            Tail = new RecursList<T>(Info, Tail);
+            Info = value;
+            Index++;
+            if (Index == 0)
+                Tail = null;
+        }
+
+        public void Print()
+        {
+            if (Index == -1)
+                return;
+            print(this);
+        }
+        private void print(RecursList<T> Item)
+        {
+            if (Item.Tail != null)
+                print(Item.Tail);
+            Console.WriteLine("[{1}] = {0} | {2}", Item.Info, Item.Index, Item.Length);
+        }
+
+        public int Find(T value)
+        {
+            for (RecursList<T> i = this; i != null; i = i.Tail)
+                if (i.Info.Equals(value))
+                    return i.Index;
+           return -1;
+        }
+
+        public void Insert(int index, T value)
+        {
+            try
+            {
+                if (index < 0 || index >= Length)
+                    throw new Exception("Индекс находится за границей списка");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+
+            if (Index == -1)
+            {
+                Add(value);
+                return;
+            }
+            for (RecursList<T> i = this; i != null; i = i.Tail)
+            {
+                if(i.Index==index)
+                {
+                    i.Tail=new RecursList<T>(value,i.Tail);
+                    i.Index++;
+                    return;
+                }
+                i.Index++;
+            }
+        }
+
+        public void InsertByValue(T findValue, T value)
+        {
+            int index = Find(findValue);
+            try
+            {
+                if (index == -1)
+                    throw new Exception(String.Format("Элемент {0} не найден", findValue));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            Insert(index, value);
+
+        }
+
+        public void InsertByAllValue(T findValue, T value)
+        {
+            var ind = FindAll(findValue);
+            if(ind.Count==0)
+            {
+                Console.WriteLine("Элемент {0} не найден", findValue);
+                return;
+            }
+            for (int i = 0; i < ind.Count; ++i)
+                Insert(ind[i], value);
+
+        }
+
+        public List<int> FindAll(T value)
+        {
+            List<int> temp = new List<int>();
+            for (RecursList<T> i = this; i != null; i = i.Tail)
+                if (i.Info.Equals(value))
+                    temp.Add(i.Index);
+            return temp;
+        }
+
+        public void Del(int index)
+        {
+            try
+            {
+                if (index < 0 || index >= Length)
+                    throw new Exception("Индекс находится за границей списка");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+
+            #region Удаление последнего элемента
+            if (index == Index)
+            {
+                Index--;
+                if(Index==-1)
+                    return;
+                Info =Tail.Info;
+                Tail = Tail.Tail;
+                return;
+            }
+            #endregion
+
+            RecursList<T> i = this;
+            for (; i.Tail.Tail != null; i = i.Tail)
+            {
+                i.Index--;
+                if (i.Tail.Index == index)
+                {
+                    i.Tail = i.Tail.Tail;
+                    return;
+                }
+            }
+            if (index == 0)
+            {
+                i.Tail = null;
+                i.Index--;
+            }
+        }
+
+        public void DelByValue(T value)
+        {
+            int index = Find(value);
+            try
+            {
+                if (index == -1)
+                    throw new Exception(String.Format("Элемент {0} не найден", value));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            Del(index);
+        }
+
+        public void DelAll()
+        {
+            Index = -1;
+            Tail = null;
+        }
+
+    }
+
+}
