@@ -132,12 +132,18 @@ namespace lab2
         {
             try
             {
-                if (index < 0 || index >= Length)
+                if (index < 0 || index > Length)
                     throw new Exception("Индекс находится за границей списка");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return;
+            }
+
+            if (index == Length)
+            {
+                Add(value);
                 return;
             }
 
@@ -158,7 +164,7 @@ namespace lab2
             }
         }
 
-        public void InsertByValue(T findValue, T value)
+        public void InsertBeforeValue(T findValue, T value)
         {
             int index = Find(findValue);
             try
@@ -175,7 +181,23 @@ namespace lab2
 
         }
 
-        public void InsertByAllValue(T findValue, T value)
+        public void InsertAfterValue(T findValue, T value)
+        {
+            int index = Find(findValue);
+            try
+            {
+                if (index == -1)
+                    throw new Exception(String.Format("Элемент {0} не найден", findValue));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            Insert(index + 1, value);
+        }
+
+        public void InsertBeforeAllValue(T findValue, T value)
         {
             var ind = FindAll(findValue);
             if(ind.Count==0)
@@ -265,10 +287,15 @@ namespace lab2
         {
             for (int i = 0; i < Length / 2; i++)
             {
-                T temp = this[i];
-                this[i] = this[Length - 1 - i];
-                this[Length - 1 - i] = temp;
+                Swap(i, Length - 1 - i);
             }
+        }
+
+        public void Swap(int first, int second)
+        {
+            T temp = this[first];
+            this[first] = this[second];
+            this[second] = temp;
         }
 
     }
