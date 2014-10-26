@@ -34,8 +34,9 @@ namespace lab2
 
         public void Print()
         {
-            for(int i=Length-1;i>=0;i--)
-                Console.WriteLine(mas[i]);
+            for (int i = Length - 1; i >= 0; i--)
+                Console.Write(string.Format("{0} ", mas[i]));
+            Console.WriteLine();
         }
 
     }
