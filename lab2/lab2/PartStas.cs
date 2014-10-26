@@ -66,5 +66,25 @@ namespace lab2
         }
 
 
+
+        public static int SixthTask(int n, int m)
+        {
+            bool[] mas = new bool[n];
+            m--;
+            for (int i = 0; i < n; i++)
+                mas[i] = true;
+            int count = n, startPos = 0;
+            while (count != 1)
+            {
+                int missed = 0;
+                while (missed != m)
+                    if (mas[(startPos++)%n])
+                        missed++;
+                while (!mas[(startPos) % n]) startPos++;
+                mas[(startPos++) % n] = false;
+                count--;
+            }
+            return Array.FindIndex(mas,x=>x==true) + 1;
+        }
     }
 }
