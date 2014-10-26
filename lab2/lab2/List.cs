@@ -98,11 +98,25 @@ namespace lab2
             if (Index == -1)
                 return;
             print(this);
+            Console.WriteLine();
         }
         private void print(RecursList<T> Item)
         {
             if (Item.Tail != null)
                 print(Item.Tail);
+            Console.Write("{0} ", Item.Info);
+        }
+
+        public void PrintDebug()
+        {
+            if (Index == -1)
+                return;
+            printDebug(this);
+        }
+        private void printDebug(RecursList<T> Item)
+        {
+            if (Item.Tail != null)
+                printDebug(Item.Tail);
             Console.WriteLine("[{1}] = {0} | {2}", Item.Info, Item.Index, Item.Length);
         }
 
@@ -245,6 +259,16 @@ namespace lab2
         {
             Index = -1;
             Tail = null;
+        }
+
+        public void Reverse()
+        {
+            for (int i = 0; i < Length / 2; i++)
+            {
+                T temp = this[i];
+                this[i] = this[Length - 1 - i];
+                this[Length - 1 - i] = temp;
+            }
         }
 
     }
