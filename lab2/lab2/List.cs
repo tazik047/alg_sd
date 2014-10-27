@@ -298,6 +298,56 @@ namespace lab2
             this[second] = temp;
         }
 
+        public void SwapRef(int first, int second)
+        {
+            RecursList<T> f = null, s = null;
+            if (Index != first && Index != second)
+            {
+                for (RecursList<T> i = this; i.Tail != null; i = i.Tail)
+                {
+                    if (i.Tail.Index == first)
+                    {
+                        f = i;
+                        break;
+                    }
+                }
+                for (RecursList<T> i = this; i.Tail != null; i = i.Tail)
+                {
+                    if (i.Tail.Index == second)
+                    {
+                        s = i;
+                        break;
+                    }
+                }
+            }
+            /*else
+            {
+                if (first == Index)
+                {
+                    f = new RecursList<T>(default(T), this);
+                }
+                else
+                {
+                    for (RecursList<T> i = this; i != null; i = i.Tail)
+                    {
+                        if (i.Tail.Index == first)
+                            f = i;
+                    }
+                }
+            }*/
+
+            if (f == null || s == null)
+                return;
+            var t = f.Tail;
+            f.Tail = s.Tail;
+            s.Tail = t;
+            t = f.Tail.Tail;
+            f.Tail.Tail = s.Tail.Tail;
+            s.Tail.Tail = t;
+            f.Tail.Index = first;
+            s.Tail.Index = second;
+        }
+
     }
 
 }
