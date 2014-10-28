@@ -208,7 +208,7 @@ namespace lab2
             for (int i = 0; i < ind.Count; ++i)
                 Insert(ind[i], value);
 
-        }
+        }//
 
         public List<int> FindAll(T value)
         {
