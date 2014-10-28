@@ -86,5 +86,70 @@ namespace lab2
             }
             return Array.FindIndex(mas,x=>x==true) + 1;
         }
+
+        public static void TenTask(RecursList<int> a)
+        {
+            if (a.Length <= 1)
+                return;
+            if (a.Length == 2)
+            {
+                if (a[0] > a[1])
+                {
+                    int temp = a[0];
+                    a[0] = a[1];
+                    a[1] = temp;
+                }
+                return;
+            }
+            int ind = part_sort(a);
+            if (ind == 0)
+            {
+                var a2 = new RecursList<int>();
+                for (int i = ind + 1; i < a.Length; i++)
+                    a2.Add(a[i]);
+                TenTask(a2);
+                for (int i = ind + 1; i < a.Length; i++)
+                    a[i] = a2[i - ind - 1];
+            }
+            else
+            {
+                var a1 = new RecursList<int>();
+                for (int i = 0; i < ind; i++)
+                    a1.Add(a[i]);
+                var a2 = new RecursList<int>();
+                for (int i = ind + 1; i < a.Length; i++)
+                    a2.Add(a[i]);
+                TenTask(a1);
+                TenTask(a2);
+                for (int i = ind + 1; i < a.Length; i++)
+                    a[i] = a2[i - ind - 1];
+                for (int i = 0; i < ind; i++)
+                    a[i] = a1[i];
+            }
+        }
+
+        static int part_sort(RecursList<int> a)
+        {
+            int s = 1, e = a.Length - 1;
+            while (s <= e)
+            {
+                while (s != a.Length && a[s] < a[0])
+                    s++;
+                while (e != 0 && a[e] > a[0])
+                    e--;
+                if (s <= e)
+                {
+                    int temp = a[s];
+                    a[s] = a[e];
+                    a[e] = temp;
+                    s += 1;
+                    e -= 1;
+                }
+            }
+            int temp1 = a[0];
+            a[0] = a[e];
+            a[e] = temp1;
+            return e;
+        }
     }
 }
