@@ -127,7 +127,6 @@ namespace lab2
                     a[i] = a1[i];
             }
         }
-
         static int part_sort(RecursList<int> a)
         {
             int s = 1, e = a.Length - 1;
@@ -150,6 +149,20 @@ namespace lab2
             a[0] = a[e];
             a[e] = temp1;
             return e;
+        }
+
+        public static int NineTask(RecursList<int> a)
+        {
+            var t = new RecursList<int>();
+            for(int i=0;i<a.Length;i++)
+            {
+                if (t.Find(a[i]) == -1)
+                {
+                    t.Add(a[i]);
+                }
+            }
+            //t.Print();
+            return t.Length;
         }
     }
 }
