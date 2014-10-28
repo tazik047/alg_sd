@@ -291,14 +291,14 @@ namespace lab2
             }
         }
 
-        public void Swap(int first, int second)
+        public void Swap(int first, int second)//меняет значения
         {
             T temp = this[first];
             this[first] = this[second];
             this[second] = temp;
         }
 
-        public void SwapRef(int first, int second)
+        public void SwapRef(int first, int second)//меняет ссылки
         {
             RecursList<T> f = null, s = null;
             if (Index != first && Index != second)

@@ -35,23 +35,25 @@ namespace lab2
         {
             Console.WriteLine("Начальный список:");
             t.Print();
-             int max = t[0];
-             int min = t[0];
+            int max = 0;
+            int min = 0;
             for (int i = 0; i < t.Length; i++)
             {
-                if (t[i] > max)
+                if (t[i] > t[max])
                     max = t[i];
             }
-            Console.WriteLine("Max = {0}",max);
+            Console.WriteLine("Max index = {0}",max);
                     
              for (int i = 0; i < t.Length; i++)
              {
-                if (t[i] < min)
+                if (t[i] < t[min])
                     min = t[i];
              }
-            Console.WriteLine("Min = {0}",min);
+            Console.WriteLine("Min index = {0}",min);
             Console.WriteLine();
             t.SwapRef(min,max);
+            t.Print();
+
 
         }
     }

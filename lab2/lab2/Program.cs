@@ -19,14 +19,10 @@ namespace lab2
             //FirstTask(t);
             //t.Print();
             //SecondTask(t).Print();
-            //t.Print();
-            //t.Print();
             //Console.WriteLine(ThirdTask("({})[]"));
+            ForthTask(t, 4).Print();
+            //FifthTask(t);
             //SeventhTask(t).Print();
-            FifthTask(t);
-            t.Print();
-
-            //Console.WriteLine( ForthTask(t, 4));
             
         }
 

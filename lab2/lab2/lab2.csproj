@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CyclicQueue.cs" />
-    <Compile Include="PartGenya.cs" />
+    <Compile Include="PartZhenya.cs" />
     <Compile Include="PartStas.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="List.cs" />
