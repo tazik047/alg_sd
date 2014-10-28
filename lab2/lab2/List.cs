@@ -319,33 +319,21 @@ namespace lab2
                         break;
                     }
                 }
+                if (f == null || s == null)
+                    return;
+                var t = f.Tail;
+                f.Tail = s.Tail;
+                s.Tail = t;
+                t = f.Tail.Tail;
+                f.Tail.Tail = s.Tail.Tail;
+                s.Tail.Tail = t;
+                f.Tail.Index = first;
+                s.Tail.Index = second;
             }
-            /*else
+            else
             {
-                if (first == Index)
-                {
-                    f = new RecursList<T>(default(T), this);
-                }
-                else
-                {
-                    for (RecursList<T> i = this; i != null; i = i.Tail)
-                    {
-                        if (i.Tail.Index == first)
-                            f = i;
-                    }
-                }
-            }*/
-
-            if (f == null || s == null)
-                return;
-            var t = f.Tail;
-            f.Tail = s.Tail;
-            s.Tail = t;
-            t = f.Tail.Tail;
-            f.Tail.Tail = s.Tail.Tail;
-            s.Tail.Tail = t;
-            f.Tail.Index = first;
-            s.Tail.Index = second;
+                Swap(first, second);
+            }
         }
 
     }
