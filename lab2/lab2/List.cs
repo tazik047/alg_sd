@@ -41,7 +41,7 @@ namespace lab2
             Index = -1;
         }
 
-        public T this[int index]
+        public T this[int index]//индексатор списка
         {
             get
             {
@@ -84,7 +84,7 @@ namespace lab2
             }
         }
 
-        public void Add(T value)
+        public void Add(T value)//добавление элемента
         {
             Tail = new RecursList<T>(Info, Tail);
             Info = value;
@@ -120,7 +120,7 @@ namespace lab2
             Console.WriteLine("[{1}] = {0} | {2}", Item.Info, Item.Index, Item.Length);
         }
 
-        public int Find(T value)
+        public int Find(T value)//поиск элемента
         {
             for (RecursList<T> i = this; i != null; i = i.Tail)
                 if (i.Info.Equals(value))
@@ -283,7 +283,7 @@ namespace lab2
             Tail = null;
         }
 
-        public void Reverse()
+        public void Reverse()//для задания 7
         {
             for (int i = 0; i < Length / 2; i++)
             {

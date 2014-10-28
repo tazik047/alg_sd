@@ -16,10 +16,18 @@ namespace lab2
             {
                 t.Add(i);
             }
+            //FirstTask(t);
             //t.Print();
             //SecondTask(t).Print();
             //t.Print();
-            Console.WriteLine(ThirdTask("(){})[]"));
+            //t.Print();
+            //Console.WriteLine(ThirdTask("({})[]"));
+            //SeventhTask(t).Print();
+            FifthTask(t);
+            t.Print();
+
+            //Console.WriteLine( ForthTask(t, 4));
+            
         }
 
     }
