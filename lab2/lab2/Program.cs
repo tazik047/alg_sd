@@ -21,11 +21,11 @@ namespace lab2
             //SecondTask(t).Print();
             //Console.WriteLine(ThirdTask("({})[]"));
             // for task 4
-            RecursList<int> rl = new RecursList<int>();
-            for (int i = 0; i < 10; i++)
+            //RecursList<int> rl = new RecursList<int>();
+            /*for (int i = 0; i < 10; i++)
             {
                 rl.Add(rnd.Next(100));
-            }
+            }*/
             //ForthTask(rl, 3).Print();
             //FifthTask(t);
             //SeventhTask(t).Print();
@@ -34,7 +34,7 @@ namespace lab2
             //sortSimple(rl);
             //rl.Print();
             //Console.WriteLine();
-            //Console.WriteLine(EightTask(t, rl));            
+            //Console.WriteLine("Cовпадений: {0}",EightTask(t, rl));            
         }
 
     }
