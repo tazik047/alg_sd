@@ -18,9 +18,15 @@ namespace lab2
             Length = 0;
         }
 
+        public Stack(int l)
+        {
+            mas = new T[l];
+            Length = 0;
+        }
+
         public void Push(T i)
         {
-            if (Length == 5)
+            if (Length == mas.Length)
                 return;
             mas[Length++] = i;
         }
@@ -30,6 +36,13 @@ namespace lab2
             if (Length == 0)
                 return default(T);
             return mas[--Length];
+        }
+
+        public T See()
+        {
+            if (Length == 0)
+                return default(T);
+            return mas[Length-1];
         }
 
         public void Print()

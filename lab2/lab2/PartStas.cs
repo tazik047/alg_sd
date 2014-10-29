@@ -164,5 +164,73 @@ namespace lab2
             //t.Print();
             return t.Length;
         }
+
+        static string findNum(string t, int pos)
+        {
+            string res = "";
+            while (pos!=t.Length && '0' <= t[pos] && t[pos] <= '9')
+            {
+                res += t[pos];
+                pos++;
+            }
+            return res;
+        }
+
+        public static string ElevenTask(string t)
+        {
+            if (!ThirdTask(t))
+                return "";
+            t = new string(t.Where(c => c != ' ').ToArray());
+            int pos = 0;
+            string res = "";
+            Stack<char> st = new Stack<char>(t.Where(c => !(c >= '0' && c <= '9')).Count());
+            while (pos < t.Length)
+            {
+                var temp = findNum(t, pos);
+                if (temp == "")
+                {
+                    char c = st.See();
+                    if (c == '\0' || c=='(')
+                        st.Push(t[pos]);
+                    else if (t[pos] == ')')
+                    {
+                        char i;
+                        while ((i = st.Pop()) != '(')
+                            res += " " + i;
+
+                    }
+                    else
+                    {
+                        int p = Prior(c) - Prior(t[pos]);
+                        if (p >= 0)
+                            res += " " + st.Pop();
+                        st.Push(t[pos]);
+                    }
+                    pos++;
+                }
+                else
+                {
+                    res += " " + temp;
+                    pos += temp.Length;
+                }
+            }
+            while (st.See() != '\0')
+                res += " " + st.Pop();
+            return res;
+        }
+
+        private static int Prior(char c)
+        {
+            switch (c)
+            {
+                case '(':
+                    return 100;
+                case '-':
+                case '+':
+                    return 5;
+                default:
+                    return 6;
+            }
+        }
     }
 }
