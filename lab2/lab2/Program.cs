@@ -26,16 +26,33 @@ namespace lab2
             {
                 rl.Add(rnd.Next(100));
             }
+            var c = new CountTimeAndExport2EXCEL.CountTime(sort);
+            CountTimeAndExport2EXCEL.FunWithExcel.Save(c.StartCount(), @"E:\ALG\lab2.1.xlsx");
+            /*rl.Print();
+            sort(rl);
+            rl.Print();*/
             //ForthTask(rl, 3).Print();
             //FifthTask(t);
             //SeventhTask(t).Print();
-    
+
+            
             //t.Print();
             //sortSimple(rl);
             //rl.Print();
             //Console.WriteLine();
-            //Console.WriteLine(EightTask(t, rl));            
+            //Console.WriteLine(EightTask(t, rl));
         }
 
+        static void sort(RecursList<int> t)
+        {
+            for (int i = 0; i < t.Length; i++)
+            {
+                for (int j = t.Length - 1; j > i; j--)
+                {
+                    if (t[j] < t[j - 1])
+                        t.Swap(j, j - 1);
+                }
+            }
+        }
     }
 }

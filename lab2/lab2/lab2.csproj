@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CountTime.cs" />
     <Compile Include="CyclicQueue.cs" />
+    <Compile Include="Element.cs" />
+    <Compile Include="FunWithEcel.cs" />
     <Compile Include="PartZhenya.cs" />
     <Compile Include="PartStas.cs" />
     <Compile Include="Program.cs" />
