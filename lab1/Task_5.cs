@@ -60,4 +60,18 @@ namespace lab1
             return smaller.Concat(new[] { pivot }).Concat(larger).ToList();
         }
     }
+    
+    public static List<T> QuickSortWithRnd<T>(List<T> list, int index) where T : IComparable<T>
+    {
+        if (!list.Any())
+            {
+                return new List<T>();
+            }
+            var pivot = list.ElementAt(index);
+            list.RemoveAt(index);
+            var smaller = QuickSortWithRnd(list.Where(item => item.CompareTo(pivot) <= 0).ToList());
+            var larger = QuickSortWithRnd(list.Where(item => item.CompareTo(pivot) > 0).ToList());
+
+            return smaller.Concat(new[] { pivot }).Concat(larger).ToList();
+    }
 }
