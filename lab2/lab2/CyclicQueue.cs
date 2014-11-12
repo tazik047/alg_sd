@@ -22,7 +22,7 @@ namespace lab2
 
         public void Push(T i)
         {
-            if ((Last + 1) == First)
+            if (((Last + 1) % mas.Length) == First)
                 return;
             if (First == -1)
                 First = 0;
