@@ -32,6 +32,7 @@ namespace lab2
             T temp = mas[0];
             for (int i = 0; i < 4; i++)
                 mas[i] = mas[i + 1];
+            Length--;
             return temp;
         }
 
