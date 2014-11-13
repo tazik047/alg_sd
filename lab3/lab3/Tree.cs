@@ -17,5 +17,11 @@ namespace lab3
         {
             Value = v;
         }
+
+        public void DrawTree()
+        {
+            var t = new Print(this);
+            t.ShowDialog();
+        }
     }
 }
