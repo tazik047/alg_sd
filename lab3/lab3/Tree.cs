@@ -6,21 +6,26 @@ using System.Threading.Tasks;
 
 namespace lab3
 {
-    class Tree
+    public class Tree<T>
     {
-        public Tree Left { get; set; }
-        public Tree Right { get; set; }
+        public Tree<T> Left { get; set; }
+        public Tree<T> Right { get; set; }
 
-        public int Value { get; set; }
+        public T Value { get; set; }
 
-        public Tree(int v)
+        public Tree(T v)
         {
             Value = v;
         }
 
+        public Tree()
+        {
+
+        }
+
         public void DrawTree()
         {
-            var t = new Print(this);
+            var t = new Print<T>(this);
             t.ShowDialog();
         }
     }
