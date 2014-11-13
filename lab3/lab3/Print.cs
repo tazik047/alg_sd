@@ -104,7 +104,15 @@ namespace lab3
 
             Point p = poin.Value;
             g.DrawEllipse(Pens.Black, p.X, p.Y, circleSize, circleSize);
-            g.DrawString(t.Value.ToString(), Font, Brushes.Black, p.X+1, p.Y+2);
+            int r;
+            if(Int32.TryParse(t.Value.ToString(), out r)){
+                g.DrawString(t.Value.ToString(), Font, Brushes.Black, p.X+1, p.Y+2);
+            }
+            else{
+                StringFormat f = new StringFormat();
+                f.FormatFlags = StringFormatFlags.DirectionVertical;
+                g.DrawString(t.Value.ToString(), Font, Brushes.Black, p.X+1, p.Y+2, f);
+            }
             if (t.Left != null)
             {
                 g.DrawLine(Pens.Black, poin.Value.X + 2, poin.Value.Y + 15, poin.Left.Value.X + 15, poin.Left.Value.Y + 2);
