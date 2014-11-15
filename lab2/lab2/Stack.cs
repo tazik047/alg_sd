@@ -38,7 +38,7 @@ namespace lab2
             return mas[--Length];
         }
 
-        public T See()
+        public T See()//посмотреть верхушку стека
         {
             if (Length == 0)
                 return default(T);

@@ -9,6 +9,9 @@ namespace lab2
 
     class RecursList<T>
     {
+        /// <summary>
+        /// Создаем список со следующими свойствами: Длина,Индекс,Информ.Поле,Хвост списка
+        /// </summary>
         private T Info;
         private RecursList<T> Tail;
         private int Index;
