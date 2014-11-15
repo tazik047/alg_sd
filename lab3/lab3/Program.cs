@@ -11,9 +11,10 @@ namespace lab3
     {
         static void Main(string[] args)
         {
-            var t = new Tree<int>(10);
-            createtree(t, 10);
-            t.DrawTree();
+            /*var t = new MatrixTree<int>(10);
+            createtree(t, 5);
+            t.DrawTree();*/
+            Console.WriteLine(findHeightPos(12));
         }
 
         static void createtree(Tree<int> t, int h)
@@ -34,6 +35,19 @@ namespace lab3
             t.Right = new Tree<Point>(new Point(3, 4));
             createtree(t.Left, h - 1);
             createtree(t.Right, h - 1);
+        }
+
+        private static Point findHeightPos(int key)
+        {
+            int x = Convert.ToInt32(Math.Log(key, 2));
+            while (x != 0)
+            {
+                int t = key / Convert.ToInt32(Math.Pow(2, x));
+                if (t * Convert.ToInt32(Math.Pow(2, x)) == key)
+                    return new Point(x, (t + 1) / 2);
+                x--;
+            }
+            return new Point(0, (key + 1) / 2);
         }
     }
 }

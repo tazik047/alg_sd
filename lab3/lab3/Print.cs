@@ -21,7 +21,7 @@ namespace lab3
         public Print()
         {
             InitializeComponent();
-            position = new Tree<Point>();
+            position = new Tree<Point>(new Point());
         }
 
         public Print(Tree<T> tree)
@@ -43,7 +43,7 @@ namespace lab3
             List<Tree<T>> treeChilds = new List<Tree<T>>() { tree };
             List<Tree<Point>> positionChilds = new List<Tree<Point>>() { position };
             int posY = 30;
-            pictureBox1.Size = new Size(posX * circleSize * 2 + circleSize,posY+height*50);
+            pictureBox1.Size = new Size(posX * circleSize * 2 + circleSize+5,posY+height*50);
             while (height != 0)
             {
                 drawElementTree(treeChilds, positionChilds, posX * circleSize, posY);
@@ -131,12 +131,12 @@ namespace lab3
                 return;
             if (t.Left != null)
             {
-                p.Left = new Tree<Point>();
+                p.Left = new Tree<Point>(new Point());
                 creartePos(p.Left, t.Left);
             }
             if (t.Right != null)
             {
-                p.Right = new Tree<Point>();
+                p.Right = new Tree<Point>(new Point());
                 creartePos(p.Right, t.Right);
             }
         }

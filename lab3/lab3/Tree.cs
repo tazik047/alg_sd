@@ -18,11 +18,6 @@ namespace lab3
             Value = v;
         }
 
-        public Tree()
-        {
-
-        }
-
         public void DrawTree()
         {
             var t = new Print<T>(this);
