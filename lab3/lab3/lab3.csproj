@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AVL-Tree.cs" />
     <Compile Include="MatrixTree.cs" />
     <Compile Include="Print.cs">
       <SubType>Form</SubType>
