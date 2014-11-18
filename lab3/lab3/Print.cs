@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace lab3
 {
-    public partial class Print<T> : Form
+    public partial class Print<C, T> : Form where C : AbsTree<C,T>
     {
-        private Tree<T> tree;
+        private AbsTree<C,T> tree;
 
         private Tree<Point> position;
 
@@ -24,7 +24,7 @@ namespace lab3
             position = new Tree<Point>(new Point());
         }
 
-        public Print(Tree<T> tree)
+        public Print(AbsTree<C, T> tree)
             : this()
         {
             this.tree = tree;
@@ -40,7 +40,7 @@ namespace lab3
 
             }
             posX = Convert.ToInt32(Math.Pow(2, height - 1) - 1);
-            List<Tree<T>> treeChilds = new List<Tree<T>>() { tree };
+            List<AbsTree<C, T>> treeChilds = new List<AbsTree<C, T>>() { tree };
             List<Tree<Point>> positionChilds = new List<Tree<Point>>() { position };
             int posY = 30;
             pictureBox1.Size = new Size(posX * circleSize * 2 + circleSize+5,posY+height*50);
@@ -57,33 +57,47 @@ namespace lab3
             pictureBox1.Invalidate();
         }
 
-        private List<Tree<E>> getNewChild<E>(List<Tree<E>> treeChilds)
+        private List<Tree<Point>> getNewChild(List<Tree<Point>> treeChilds)
         {
-            List<Tree<E>> res = new List<Tree<E>>();
+            List<Tree<Point>> res = new List<Tree<Point>>();
             foreach (var i in treeChilds)
             {
                 if (i == null)
-                    res.AddRange(new List<Tree<E>>() { null, null });
+                    res.AddRange(new List<Tree<Point>>() { null, null });
                 else
-                    res.AddRange(new List<Tree<E>>() { i.Left, i.Right });
+                    res.AddRange(new List<Tree<Point>>() { i.Left, i.Right });
             }
             return res;
         }
 
-        private void drawElementTree(List<Tree<T>> treeChilds, List<Tree<Point>> position, int posX, int posY)
+        private List<AbsTree<C, T>> getNewChild(List<AbsTree<C, T>> treeChilds)
+        {
+            List<AbsTree<C, T>> res = new List<AbsTree<C, T>>();
+            foreach (var i in treeChilds)
+            {
+                if (i == null)
+                    res.AddRange(new List<AbsTree<C, T>>() { null, null });
+                else
+                    res.AddRange(new List<AbsTree<C, T>>() { i.Left, i.Right });
+            }
+            return res;
+        }
+
+        private void drawElementTree(List<AbsTree<C, T>> treeChilds, List<Tree<Point>> position, int posX, int posY)
         {
             int pos = posX + circleSize;
-            position[0].Value = new Point(posX, posY);
+            if (treeChilds[0] != null)
+                position[0].Value = new Point(posX, posY);
             for (int i = 1; i < treeChilds.Count; i++)
             {
                 pos += posX * 2 + circleSize;
-                if(treeChilds!=null)
-                position[i].Value = new Point(pos, posY);
+                if (treeChilds[i] != null)
+                    position[i].Value = new Point(pos, posY);
                 pos += circleSize;
             }
         }
 
-        private int countHeight<E>(Tree<E> t)
+        private int countHeight(AbsTree<C,T> t)
         {
             if (t == null)
                 return 0;
@@ -97,7 +111,7 @@ namespace lab3
             draw(g, position, tree);
         }
 
-        private void draw(Graphics g, Tree<Point> poin, Tree<T> t)
+        private void draw(Graphics g, Tree<Point> poin, AbsTree<C, T> t)
         {
             if (poin == null)
                 return;
@@ -125,7 +139,7 @@ namespace lab3
             }
         }
 
-        private void creartePos(Tree<Point> p, Tree<T> t)
+        private void creartePos(Tree<Point> p, AbsTree<C, T> t)
         {
             if (t == null)
                 return;

@@ -1,6 +1,6 @@
 ﻿namespace lab3
 {
-    partial class Print<T>
+    partial class Print<C, T>
     {
         /// <summary>
         /// Required designer variable.

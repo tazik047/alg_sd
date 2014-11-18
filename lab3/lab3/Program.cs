@@ -11,10 +11,21 @@ namespace lab3
     {
         static void Main(string[] args)
         {
-            /*var t = new MatrixTree<int>(10);
+            var rnd = new Random();
+
+            // просто дерево
+            /*var t = new Tree<int>(10);
             createtree(t, 5);
             t.DrawTree();*/
-            Console.WriteLine(findHeightPos(12));
+
+            // авл дерево
+            var t = new AVLNode(rnd.Next() % 100);
+            for (int i = 0; i < 15; i++)
+            {
+                t.insert(rnd.Next() % 100);
+                t.DrawTree();
+            }
+            t.DrawTree();
         }
 
         static void createtree(Tree<int> t, int h)
