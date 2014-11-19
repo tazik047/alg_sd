@@ -37,7 +37,12 @@ namespace lab3
                     {
                         root.Right = node;
                         node.parent = root;
-                        fixTrouble(root, node);
+                        while (root != this)
+                        {
+                            fixTrouble(root, node);
+                            node = root;
+                            root = root.parent;
+                        }
                         this.color = Color.Black;
                         break;
                     }
@@ -49,7 +54,12 @@ namespace lab3
                     {
                         root.Left = node;
                         node.parent = root;
-                        fixTrouble(root, node);
+                        while (root != this)
+                        {
+                            fixTrouble(root, node);
+                            node = root;
+                            root = root.parent;
+                        }
                         this.color = Color.Black;
                         break;
                     }
@@ -84,26 +94,35 @@ namespace lab3
 
                         if (root.parent.parent == null) // если дедушка и есть корень.
                         {
-                            var newRight = new ReadBlackTree(this.Value, Color.Red, root);
+                            var newRight = new ReadBlackTree(this.Value, Color.Red, this);
                             newRight.Right = this.Right;
+                            if (this.Right != null)
+                                this.Right.parent = newRight;
                             newRight.Left = root.Right;
+                            if (root.Right != null)
+                                root.Right.parent = newRight;
                             this.Value = root.Value;
                             this.Right = newRight;
                             this.Left = newChild;
+                            newChild.parent = this;
+                            
                         }
 
                         else
                         {
                             var grand = root.parent;
                             grand.Left = root.Right;
-                            if (root.parent != null)
+                            if (root.Right != null)
                                 root.Right.parent = grand.Left;
                             grand.color = Color.Red;
                             root.Right = grand;
                             root.color = Color.Black;
                             root.parent = grand.parent;
+                            if (grand.parent.Left == grand)
+                                root.parent.Left = root;
+                            else
+                                root.parent.Right = root;
                             grand.parent = root;
-                            grand.Left.parent = grand;
                         }
                     }
 
@@ -137,12 +156,17 @@ namespace lab3
                         ////////////////////////////////////////////////////////
                         if (root.parent.parent == null) // если дедушка и есть корень.
                         {
-                            var newRight = new ReadBlackTree(this.Value, Color.Red, root);
-                            newRight.Left = this.Left;
-                            newRight.Right = root.Left;
+                            var newLeft = new ReadBlackTree(this.Value, Color.Red, this);
+                            newLeft.Left = this.Left;
+                            if (this.Left != null)
+                                this.Left.parent = newLeft;
+                            newLeft.Right = root.Left;
+                            if (root.Left != null)
+                                root.Left.parent = newLeft;
                             this.Value = root.Value;
-                            this.Left = newRight;
+                            this.Left = newLeft;
                             this.Right = newChild;
+                            newChild.parent = this;
                         }
 
                         else
