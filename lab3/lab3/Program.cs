@@ -18,13 +18,22 @@ namespace lab3
             createtree(t, 5);
             t.DrawTree();*/
 
-            // авл дерево
-            var t = new AVLNode(rnd.Next() % 100);
+            var t = new ReadBlackTree(39);
+            t.Insert(96); t.DrawTree();
+            t.Insert(29); t.DrawTree();
+            t.Insert(45); t.DrawTree();
+            t.Insert(34); t.DrawTree();
+            t.Insert(31); t.DrawTree();
+            t.Insert(56); t.DrawTree();
+            t.Insert(99); t.DrawTree();
+            t.Insert(81); t.DrawTree();
+            t.Insert(23);
+           /* var t = new AVLNode(rnd.Next() % 100);
             for (int i = 0; i < 25; i++)
             {
                 t.insert(rnd.Next() % 100);
                 
-            }
+            }*/
             t.DrawTree();
         }
 
