@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace lab3
 {
-    public partial class Print<C, T> : Form where C : AbsTree<C,T>
+    public partial class Print<C, T> : Form where C : AbsTree<C, T>
     {
-        private AbsTree<C,T> tree;
+        private AbsTree<C, T> tree;
 
         private Tree<Point> position;
 
@@ -36,14 +36,15 @@ namespace lab3
         {
             int height = countHeight(tree);
             int posX = 0;
-            if(height==1){
+            if (height == 1)
+            {
 
             }
             posX = Convert.ToInt32(Math.Pow(2, height - 1) - 1);
             List<AbsTree<C, T>> treeChilds = new List<AbsTree<C, T>>() { tree };
             List<Tree<Point>> positionChilds = new List<Tree<Point>>() { position };
             int posY = 30;
-            pictureBox1.Size = new Size(posX * circleSize * 2 + circleSize+5,posY+height*50);
+            pictureBox1.Size = new Size(posX * circleSize * 2 + circleSize + 5, posY + height * 50);
             while (height != 0)
             {
                 drawElementTree(treeChilds, positionChilds, posX * circleSize, posY);
@@ -97,11 +98,11 @@ namespace lab3
             }
         }
 
-        private int countHeight(AbsTree<C,T> t)
+        private int countHeight(AbsTree<C, T> t)
         {
             if (t == null)
                 return 0;
-            return countHeight(t.Left) > countHeight(t.Right) ? 
+            return countHeight(t.Left) > countHeight(t.Right) ?
                 (countHeight(t.Left) + 1) : (countHeight(t.Right) + 1);
         }
 
@@ -117,15 +118,24 @@ namespace lab3
                 return;
 
             Point p = poin.Value;
+            var colorText = Brushes.Black;
+            if (t.color != Color.Transparent)
+            {
+                if (t.color == Color.Black)
+                    colorText = Brushes.White;
+                g.FillEllipse(t.color == Color.Red ? Brushes.Red : Brushes.Black, p.X, p.Y, circleSize, circleSize);
+            }
             g.DrawEllipse(Pens.Black, p.X, p.Y, circleSize, circleSize);
             int r;
-            if(Int32.TryParse(t.Value.ToString(), out r)){
-                g.DrawString(t.Value.ToString(), Font, Brushes.Black, p.X+1, p.Y+2);
+            if (Int32.TryParse(t.Value.ToString(), out r))
+            {
+                g.DrawString(t.Value.ToString(), Font, colorText, p.X + 1, p.Y + 2);
             }
-            else{
+            else
+            {
                 StringFormat f = new StringFormat();
                 f.FormatFlags = StringFormatFlags.DirectionVertical;
-                g.DrawString(t.Value.ToString(), Font, Brushes.Black, p.X+1, p.Y+2, f);
+                g.DrawString(t.Value.ToString(), Font, colorText, p.X + 1, p.Y + 2, f);
             }
             if (t.Left != null)
             {
@@ -154,7 +164,5 @@ namespace lab3
                 creartePos(p.Right, t.Right);
             }
         }
-
-
     }
 }
