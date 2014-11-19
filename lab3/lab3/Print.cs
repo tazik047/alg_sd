@@ -154,5 +154,7 @@ namespace lab3
                 creartePos(p.Right, t.Right);
             }
         }
+
+
     }
 }
