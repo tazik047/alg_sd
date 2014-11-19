@@ -19,7 +19,7 @@ namespace lab3
             t.DrawTree();*/
 
             // авл дерево
-            var t = new AVLNode(rnd.Next() % 100);
+           /* var t = new AVLNode(rnd.Next() % 100);
             for (int i = 0; i < 25; i++)
             {
                 t.insert(rnd.Next() % 100);
@@ -58,7 +58,7 @@ namespace lab3
                     return new Point(x, (t + 1) / 2);
                 x--;
             }
-            return new Point(0, (key + 1) / 2);
+            return new Point(0, (key + 1) / 2);*/
         }
     }
 }
