@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace lab3
 {
-    class Splay_Tree_Node: AbsTree<Splay_Tree_Node, int> 
+    class Splay_Tree: AbsTree<Splay_Tree, int> 
     {
         //родитель сплэй-узла
-        public Splay_Tree_Node Parent { get; set; }
+        public Splay_Tree Parent { get; set; }
 
-        public void init(Splay_Tree_Node self, int value,
-            Splay_Tree_Node left = null, Splay_Tree_Node right = null, Splay_Tree_Node parent = null)
+        public void init(Splay_Tree self, int value,
+            Splay_Tree left = null, Splay_Tree right = null, Splay_Tree parent = null)
         {
             self.Left = left;
             self.Right = right;
@@ -21,25 +21,25 @@ namespace lab3
 
         }
         #region для работы с указателями на родителей
-        public void set_parent(Splay_Tree_Node child,
-            Splay_Tree_Node parent)
+        public void set_parent(Splay_Tree child,
+            Splay_Tree parent)
         {
             if (child != null) child.Parent = parent;//если нулл, тогда становится корнем
         }
 
-        public void keep_parent(Splay_Tree_Node v)
+        public void keep_parent(Splay_Tree  v)
         {
             set_parent(v.Left, v);
             set_parent(v.Right, v);
         }
         #endregion
 
-        public void rotate(Splay_Tree_Node parent, Splay_Tree_Node child)
+        public void rotate(Splay_Tree parent, Splay_Tree child)
         //После обращения к любой вершине, она поднимается в корень.
         //Подъем реализуется через повороты вершин.
         //За один поворот, можно поменять местами родителя с ребенком
         {
-            Splay_Tree_Node grandparent = parent.Parent;
+            Splay_Tree grandparent = parent.Parent;
             if (grandparent != null)
             {
                 if (grandparent.Left == child) grandparent.Left = child;
@@ -60,23 +60,75 @@ namespace lab3
             child.Parent = grandparent;
         }
 
-    }
-    class Splay_Tree
-    {
-        public Splay_Tree()
+        public Splay_Tree(int v)
         {
             root = null;
+            Value = v; 
         }
-       /* public Splay_Tree_Node SPlay(Splay_Tree_Node v)
+
+        public Splay_Tree SPlay(Splay_Tree v)
         {
             if (v.Parent == null) 
                 return v;
-            Splay_Tree_Node parent = v.Parent;
-            Splay_Tree_Node grandparent = parent.Parent;
-            if(grandparent == null)
-                //rotate()///?ругается что нет
-        }*/
-        private Splay_Tree_Node root;
+            Splay_Tree parent = v.Parent;
+            Splay_Tree grandparent = parent.Parent;
+            if (grandparent == null)
+            {
+                rotate(parent, v);
+                return v;
+            }
+            else 
+            {
+                var zigzig = (grandparent.Left == parent) == (parent.Left == v);
+                if (zigzig)
+                {
+                    rotate(grandparent, parent);
+                    rotate(parent, v);
+                }
+                else 
+                {
+                    rotate(parent, v);
+                    rotate(grandparent, v);
+                }
+                return SPlay(v);
+            }
+
+        }
+        //поиск в splay-дереве отличается от обычной только на последней стадии:
+        //после того, как вершина найдена, мы тянем ее вверх и делаем корнем через splay.
+        public Splay_Tree find(Splay_Tree v, int value)
+        {
+            if (v == null)
+                return null;
+            if (value == v.Value)
+                return SPlay(v);
+            if ((value < v.Value) && (v.Left != null)) return find(v.Left, value);
+            if ((value > v.Value) && (v.Right != null)) return find(v.Right, value);
+            return SPlay(v);
+        }
+
+        public Splay_Tree split(Splay_Tree root, int value)
+        {
+            if (root == null) new List<Splay_Tree>() { null, null };
+            root = find(root, value);
+            if (root.Value == value) 
+            {
+                set_parent(root.Left, null);
+                set_parent(root.Right, null);
+               return new List<Splay_Tree>() { Left, Right  };
+            }
+            if (root.Value < value)
+            {
+                Right = root.Right;
+                root.Right = null;
+              
+            }
+        }
+
+        //split получает на вход ключ и делит дерево на два.
+
+
+        private Splay_Tree root;
     }
 }
 
