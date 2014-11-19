@@ -20,10 +20,10 @@ namespace lab3
 
             // авл дерево
             var t = new AVLNode(rnd.Next() % 100);
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 100; i++)
             {
                 t.insert(rnd.Next() % 100);
-                t.DrawTree();
+               // t.DrawTree();
             }
             t.DrawTree();
         }
