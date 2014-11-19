@@ -32,7 +32,7 @@ namespace lab3
             set_parent(v.Left, v);
             set_parent(v.Right, v);
         }
-#endregion
+        #endregion
 
         public void rotate(Splay_Tree_Node parent, Splay_Tree_Node child)
         //После обращения к любой вершине, она поднимается в корень.
