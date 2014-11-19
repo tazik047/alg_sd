@@ -11,17 +11,24 @@ namespace lab3
     {
         private ReadBlackTree parent;
 
-        public ReadBlackTree()
+        public ReadBlackTree(int v)
         {
             color = Color.Black;
+            Value = v;
+        }
+
+        private ReadBlackTree(int v, Color c, ReadBlackTree parent)
+        {
+            color = c;
+            this.parent = parent;
+            Value = v;
         }
 
         public void Insert(int a)
         {
             var root = this;
-            ReadBlackTree node = new ReadBlackTree();
+            ReadBlackTree node = new ReadBlackTree(a);
             node.color = Color.Red;
-            node.Value = a;
             while (true)
             {
                 if (a > root.Value)
@@ -30,10 +37,8 @@ namespace lab3
                     {
                         root.Right = node;
                         node.parent = root;
-                        if (root.color == Color.Red)
-                        {
-
-                        }
+                        fixTrouble(root, node);
+                        this.color = Color.Black;
                         break;
                     }
                     root = root.Right;
@@ -42,7 +47,10 @@ namespace lab3
                 {
                     if (root.Left == null)
                     {
-                        //TODO
+                        root.Left = node;
+                        node.parent = root;
+                        fixTrouble(root, node);
+                        this.color = Color.Black;
                         break;
                     }
                     root = root.Left;
@@ -51,24 +59,23 @@ namespace lab3
             
         }
 
-        public static bool operator== (ReadBlackTree f, ReadBlackTree s){
-            return f.Value==s.Value && f.color==s.color;
-        }
-
         private void fixTrouble(ReadBlackTree root, ReadBlackTree newChild){
+            if (root.parent == null)
+                return;
             if (root == root.parent.Left) // если отец слева от дедушки.
             {
-                if (root.color == Color.Red && root.color == root.Left.color)  // проверяем, оба ли красные.
+                if (root.color == Color.Red && root.color == newChild.color)  // проверяем, оба ли красные.
                 {
                     // проверяем дядю ребенка
                     if (root.parent.Right == null ||
-                        root.parent.Right.color == Color.Black)  // p.s лист всегда черный.
+                        root.parent.Right.color == Color.Black)  // p.s лист всегда черный если он null.
                     {
                         if (root.Right == newChild)
                         {
                             newChild.parent = root.parent;
+                            root.parent.Left = newChild;
                             root.parent = newChild;
-                            newChild.parent.Left = newChild;
+                            newChild.parent.Left = root;
                             root.Right = null;
                             newChild.Left = root;
                             newChild = newChild.Left;  // меняем сейчас ранен созданные  элемент с новым,
@@ -77,18 +84,26 @@ namespace lab3
 
                         if (root.parent.parent == null) // если дедушка и есть корень.
                         {
-
+                            var newRight = new ReadBlackTree(this.Value, Color.Red, root);
+                            newRight.Right = this.Right;
+                            newRight.Left = root.Right;
+                            this.Value = root.Value;
+                            this.Right = newRight;
+                            this.Left = newChild;
                         }
 
                         else
                         {
                             var grand = root.parent;
                             grand.Left = root.Right;
+                            if (root.parent != null)
+                                root.Right.parent = grand.Left;
                             grand.color = Color.Red;
                             root.Right = grand;
                             root.color = Color.Black;
                             root.parent = grand.parent;
                             grand.parent = root;
+                            grand.Left.parent = grand;
                         }
                     }
 
@@ -100,11 +115,101 @@ namespace lab3
                     }
                 }
             }
+            else // справа. все зеркально, относительно того, что выше.
+            {
+                if (root.color == Color.Red && root.color == newChild.color)  // проверяем, оба ли красные.
+                {
+                    // проверяем дядю ребенка
+                    if (root.parent.Left == null ||
+                        root.parent.Left.color == Color.Black)  // p.s лист всегда черный.
+                    {
+                        if (root.Left == newChild)
+                        {
+                            newChild.parent = root.parent;
+                            root.parent.Right = newChild;
+                            root.parent = newChild;
+                            root.Left = null;
+                            newChild.Right = root;
+                            newChild = newChild.Right;  // меняем сейчас ранен созданные  элемент с новым,
+                            root = newChild.parent;    // чтоб можно было для следующего случая использовать.
+                        }
+
+                        ////////////////////////////////////////////////////////
+                        if (root.parent.parent == null) // если дедушка и есть корень.
+                        {
+                            var newRight = new ReadBlackTree(this.Value, Color.Red, root);
+                            newRight.Left = this.Left;
+                            newRight.Right = root.Left;
+                            this.Value = root.Value;
+                            this.Left = newRight;
+                            this.Right = newChild;
+                        }
+
+                        else
+                        {
+                            var grand = root.parent;
+                            grand.Right = root.Left;
+                            if (root.Left != null)
+                                root.Left.parent = grand;
+                            grand.color = Color.Red;
+                            root.Left = grand;
+                            root.color = Color.Black;
+                            root.parent = grand.parent;
+                            if (grand.parent.Left == grand)
+                                root.parent.Left = root;
+                            else
+                                root.parent.Right = root;
+                            grand.parent = root;
+                        }
+                    }
+
+                    else if (root.parent.Left.color == Color.Red)
+                    {
+                        root.parent.color = Color.Red;
+                        root.color = Color.Black;
+                        root.parent.Left.color = Color.Black;
+                    }
+                }
+            }
+        }
+
+        public static bool operator ==(ReadBlackTree f, ReadBlackTree s)
+        {
+            try
+            {
+                return f.Equals(s);
+            }
+            catch (NullReferenceException)
+            {
+                try
+                {
+                    return s.Equals(f);
+                }
+                catch (NullReferenceException)
+                {
+                    return true;
+                }
+            }
+        }
+
+        public static bool operator !=(ReadBlackTree f, ReadBlackTree s)
+        {
+            return !(f == s);
+        }
+
+        public override bool Equals(object obj)
+        {
+
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value == ((ReadBlackTree)obj).Value && color == ((ReadBlackTree)obj).color;
+        }
+
+        public override int GetHashCode()
+        {
+            return Value;
         }
     }
-
-    enum childEnum
-	{
-	    Left,Right
-	}
 }
