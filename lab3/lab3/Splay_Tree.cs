@@ -107,6 +107,7 @@ namespace lab3
             return SPlay(v);
         }
 
+        //split получает на вход ключ и делит дерево на два.
         public Splay_Tree split(Splay_Tree root, int value)
         {
             if (root == null) new List<Splay_Tree>() { null, null };
@@ -115,17 +116,19 @@ namespace lab3
             {
                 set_parent(root.Left, null);
                 set_parent(root.Right, null);
-               return new List<Splay_Tree>() { Left, Right  };
+              // return new List<Splay_Tree>() { Left, Right  };
             }
             if (root.Value < value)
             {
                 Right = root.Right;
                 root.Right = null;
+                set_parent(Right, null);
+                //return new List<Splay_Tree>() { root, Right };
               
             }
         }
 
-        //split получает на вход ключ и делит дерево на два.
+        
 
 
         private Splay_Tree root;
