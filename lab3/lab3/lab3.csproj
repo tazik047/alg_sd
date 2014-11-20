@@ -54,6 +54,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadBlackTree.cs" />
+    <Compile Include="SplayTree.cs" />
     <Compile Include="Splay_Tree.cs" />
     <Compile Include="Tree.cs" />
   </ItemGroup>

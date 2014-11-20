@@ -38,10 +38,14 @@ namespace lab3
             t.Insert(34);t.DrawTree();
             t.Insert(33);t.DrawTree();
             t.Insert(32);*/
-            var t = new Splay_Tree(rnd.Next() % 100);
+            int a1 = rnd.Next() % 100;
+            var t = new SplayTree(a1);
+            Console.Write("{0} ", a1);
             for (int i = 0; i < 5; i++)
             {
-                t.insert(rnd.Next() % 100);
+                int a = rnd.Next() % 100;
+                t.insert(a);
+                Console.Write("{0} ", a);
                 
             }
             t.DrawTree();
