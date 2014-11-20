@@ -18,8 +18,8 @@ namespace lab3
             createtree(t, 5);
             t.DrawTree();*/
 
-            var t = new ReadBlackTree(39);
-            t.Insert(96); t.DrawTree();
+            //var t = new ReadBlackTree(39);
+            /*t.Insert(96); t.DrawTree();
             t.Insert(29); t.DrawTree();
             t.Insert(45); t.DrawTree();
             t.Insert(34); t.DrawTree();
@@ -27,13 +27,23 @@ namespace lab3
             t.Insert(56); t.DrawTree();
             t.Insert(99); t.DrawTree();
             t.Insert(81); t.DrawTree();
-            t.Insert(23);
-           /* var t = new AVLNode(rnd.Next() % 100);
-            for (int i = 0; i < 25; i++)
+            t.Insert(23); t.DrawTree();
+            t.Insert(70); t.DrawTree();
+            t.Insert(75); t.DrawTree();
+            t.Insert(17);*/
+            /*t.Insert(38); t.DrawTree();
+            t.Insert(37); t.DrawTree();
+            t.Insert(36); t.DrawTree();
+            t.Insert(35);t.DrawTree();
+            t.Insert(34);t.DrawTree();
+            t.Insert(33);t.DrawTree();
+            t.Insert(32);*/
+            var t = new Splay_Tree(rnd.Next() % 100);
+            for (int i = 0; i < 5; i++)
             {
                 t.insert(rnd.Next() % 100);
                 
-            }*/
+            }
             t.DrawTree();
         }
 

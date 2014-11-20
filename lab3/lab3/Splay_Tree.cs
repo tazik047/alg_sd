@@ -18,7 +18,13 @@ namespace lab3
             this.Right = right;
             this.Value = value;
             this.Parent = parent;
+            this.root = new Splay_Tree(value);
 
+        }
+
+        public new void DrawTree(){
+            var t = new Print<Splay_Tree, int>(root);
+            t.ShowDialog();
         }
         #region для работы с указателями на родителей
         public void set_parent(Splay_Tree child,
@@ -135,14 +141,13 @@ namespace lab3
             }
         }
 
-        public Splay_Tree insert(Splay_Tree root, int key){
+        public void insert(int key){
         
             var t = split(root, key);
             Left = t[0];
             Right = t[1];
             root = new Splay_Tree(key, Left, Right);
             keep_parent(root);
-            return root;
         }
 
 
