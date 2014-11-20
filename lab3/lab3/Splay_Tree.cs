@@ -11,13 +11,13 @@ namespace lab3
         //родитель сплэй-узла
         public Splay_Tree Parent { get; set; }
 
-        public void init(Splay_Tree self, int value,
+        public Splay_Tree(int value,
             Splay_Tree left = null, Splay_Tree right = null, Splay_Tree parent = null)
         {
-            self.Left = left;
-            self.Right = right;
-            self.Value = value;
-            self.Parent = parent;
+            this.Left = left;
+            this.Right = right;
+            this.Value = value;
+            this.Parent = parent;
 
         }
         #region для работы с указателями на родителей
@@ -135,7 +135,15 @@ namespace lab3
             }
         }
 
+        public Splay_Tree insert(Splay_Tree root, int key){
         
+            var t = split(root, key);
+            Left = t[0];
+            Right = t[1];
+            root = new Splay_Tree(key, Left, Right);
+            keep_parent(root);
+            return root;
+        }
 
 
         private Splay_Tree root;
